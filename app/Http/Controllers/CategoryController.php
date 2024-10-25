@@ -13,8 +13,12 @@ class CategoryController extends Controller
     }
 
     public function show(Category $category)
-    {
-        $tracks = $category->tracks()->with('week', 'user')->orderByDesc('likes_count')->paginate(20);
-        return view('app.categories.show', compact('category', 'tracks'));
-    }
+{
+    $tracks = $category->tracks()
+        ->with(['week', 'user', 'likes'])
+        ->withCount('likes')
+        ->orderByDesc('likes_count')
+        ->paginate(20);
+    return view('app.categories.show', compact('category', 'tracks'));
+}
 }
