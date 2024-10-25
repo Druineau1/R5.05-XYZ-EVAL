@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\Week;
 use Database\Samples\TrackSamples;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use App\Models\Category;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Track>
@@ -25,6 +26,9 @@ class TrackFactory extends Factory
         return [
             'user_id' => User::factory(),
             'week_id' => Week::factory(),
+            'category_id' => function () {
+                return Category::inRandomOrder()->first()->id;
+            },
             'artist' => fake()->name(),
             'title' => fake()->sentence(2),
             'url' => fake()->randomElement(['https://youtube.com/watch?v=ID', 'https://soundcloud/USER/TRACK']),
