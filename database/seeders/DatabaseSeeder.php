@@ -33,5 +33,8 @@ class DatabaseSeeder extends Seeder
                 return ['email' => "user{$id}@example.com"];
             })
             ->create();
+
+        // Create categories
+        $this->call(CategorySeeder::class);
     }
 }
